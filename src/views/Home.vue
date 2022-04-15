@@ -1,10 +1,10 @@
 <template>
   <div class="background"></div>
   <div class="container">
-    <h1>To Do List</h1>
+    <h1 class="title">To Do List</h1>
     <div class="form-container">
       <form @submit.prevent="addNewTodo">
-        <label class="todoName" for="newTodo">À faire : </label>
+        <label class="todoName" for="newTodo">Nouvelle tâche : </label>
         <div class="input-container">
           <input v-model="newTodo" name="newTodo" />
           <button class="btn addTask">Ajouter</button>
@@ -17,6 +17,7 @@
         Marquer tout comme "Fait"
       </button>
     </div>
+    <h2 class="title tasks">À Faire :</h2>
     <div class="todo-container" v-for="(todo, index) in todos" :key="todo.id">
       <ul>
         <li class="todo">
@@ -91,10 +92,13 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-h1 {
-  margin-top: -20px;
+.title {
+  margin-top: 20px;
   text-decoration: underline;
   color: #48c9c1;
+  &.tasks {
+    margin: 40px 0 -20px 0;
+  }
 }
 .form-container {
   display: flex;
