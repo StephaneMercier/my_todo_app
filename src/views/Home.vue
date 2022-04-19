@@ -1,35 +1,36 @@
 <template>
-  <div class="background"></div>
-  <div class="container">
-    <h1 class="title">To Do List</h1>
-    <div class="form-container">
-      <form @submit.prevent="addNewTodo">
-        <label class="todoName" for="newTodo">Nouvelle tâche : </label>
-        <div class="input-container">
-          <input v-model="newTodo" name="newTodo" />
-          <button class="btn addTask">Ajouter</button>
-        </div>
-      </form>
-    </div>
-    <div class="btn-section">
-      <button class="btn removeAll" @click="removeAll">Effacer tout</button>
-      <button class="btn markAll" @click="markAllDone">
-        Marquer tout comme "Fait"
-      </button>
-    </div>
-    <h2 class="title tasks">À Faire :</h2>
-    <div class="todo-container" v-for="(todo, index) in todos" :key="todo.id">
-      <ul>
-        <li class="todo">
-          <p :class="{ done: todo.done }" @click="toggleDone(todo)">
-            {{ todo.content }}
-          </p>
+  <div class="background">
+    <div class="container">
+      <h1 class="title">To Do List</h1>
+      <div class="form-container">
+        <form @submit.prevent="addNewTodo">
+          <label class="todoName" for="newTodo">Nouvelle tâche : </label>
+          <div class="input-container">
+            <input v-model="newTodo" name="newTodo" />
+            <button class="btn addTask">Ajouter</button>
+          </div>
+        </form>
+      </div>
+      <div class="btn-section">
+        <button class="btn removeAll" @click="removeAll">Effacer tout</button>
+        <button class="btn markAll" @click="markAllDone">
+          Marquer tout comme "Fait"
+        </button>
+      </div>
+      <h2 class="title tasks">À Faire :</h2>
+      <div class="todo-container" v-for="(todo, index) in todos" :key="todo.id">
+        <ul>
+          <li class="todo">
+            <p :class="{ done: todo.done }" @click="toggleDone(todo)">
+              {{ todo.content }}
+            </p>
 
-          <button class="btn removeTodo" @click="removeTodo(index)">
-            Effacer la tâche
-          </button>
-        </li>
-      </ul>
+            <button class="btn removeTodo" @click="removeTodo(index)">
+              Effacer la tâche
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -46,7 +47,7 @@ export default {
         done: false,
         content: newTodo.value,
       });
-      localStorage.setItem("task", [newTodo.value]);
+      localStorage.setItem("task", newTodo.value);
       newTodo.value = "";
     }
     function toggleDone(todo) {
@@ -81,16 +82,26 @@ export default {
 <style lang="scss" scoped>
 .background {
   background-color: #48c9c1;
-  // height: 100vh;
+  height: 100vh;
+  padding-top: 100px;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .container {
-  border: 3px solid #48c9c1;
+  background-color: #fff;
+  border: 3px solid #fff;
   border-radius: 20px;
   padding: 40px;
   margin: 20px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 1;
+  @media only screen and (min-width: 768px) {
+    width: 50%;
+  }
 }
 .title {
   margin-top: 20px;
